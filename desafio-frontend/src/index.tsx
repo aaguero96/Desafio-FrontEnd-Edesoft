@@ -5,13 +5,13 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Users from './components/Users';
 import App from './App';
-import Register from './components/Register';
 import User from './components/User';
 import Update from './components/Update';
 import Delete from './components/Delete';
 import Login from './pages/Login';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import RegisterPage from './pages/Register';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <Register />
+    element: <RegisterPage />
   },
   {
     path: "/delete/:id",
