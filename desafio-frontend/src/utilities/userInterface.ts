@@ -38,3 +38,7 @@ export interface IUserFilter {
   city: string;
   phone: string;
 }
+
+export interface UserState {
+  users: IUser[];
+}
