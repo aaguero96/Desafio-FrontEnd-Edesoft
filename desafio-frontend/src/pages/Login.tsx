@@ -80,8 +80,8 @@ function Login() {
             const validate3 = password === user.password;
             return (validate1 || validate2) && validate3;
           });
-          if (register?.length !== 0) {
-            navigate("/home");
+          if (register?.length !== 0 && register !== undefined) {
+            navigate(`/home/${register[0].id}}`);
           } else {
             setNoHasRegister(false);
           }
