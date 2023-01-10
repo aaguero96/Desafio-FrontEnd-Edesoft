@@ -36,7 +36,7 @@ function Users() {
         user.email.includes(filters.email.toLowerCase()),
         user.address.city.includes(filters.city.toLowerCase()),
         user.phone.includes(filters.phone.toLowerCase()),
-        user.id <= limit,
+        user.id === undefined ? true : user.id <= limit,
       ];
       return validate.every((i) => i);
     }));
