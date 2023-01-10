@@ -26,6 +26,16 @@ const getUsers = async (limit: number | undefined , sort: order | undefined): Pr
   return data;
 }
 
+const createUser = async (user: IUser): Promise<IUser> => {
+  const response: Response = await fetch(BASE_URL, {
+    method: "POST",
+    body: JSON.stringify(user),
+  });
+  const data: IUser = await response.json();
+  return data;
+}
+
 export {
   getUsers,
+  createUser,
 }
