@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IUser } from '../utilities/userInterface';
 import { getUserById, updateUser } from '../utilities/users';
 import { firstToUpper } from '../utilities/utils';
@@ -22,6 +22,8 @@ function Update() {
   const [phone, setPhone] = useState<string>("");
 
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -264,6 +266,13 @@ function Update() {
         }}
       >
         Alterar
+      </button>
+      <button
+        onClick={() => {
+          navigate(`/delete/${id}`);
+        }}
+      >
+        Deletar
       </button>
     </div>
   );
