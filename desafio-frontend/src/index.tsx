@@ -7,6 +7,7 @@ import Users from './components/Users';
 import App from './App';
 import Register from './components/Register';
 import User from './components/User';
+import Update from './components/Update';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/users/:id",
     element: <User />
+  },
+  {
+    path: "/edit/:id",
+    element: <Update />
   },
   {
     path: "/register",
