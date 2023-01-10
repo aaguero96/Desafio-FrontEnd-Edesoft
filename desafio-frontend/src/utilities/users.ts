@@ -41,8 +41,18 @@ const getUserById = async (id: number): Promise<IUser> => {
   return data;
 }
 
+const updateUser = async (user: IUser): Promise<IUser> => {
+  const response: Response = await fetch(`${BASE_URL}/${user.id}`, {
+    method: "PUT",
+    body: JSON.stringify(user),
+  });
+  const data: IUser = await response.json();
+  return data;
+}
+
 export {
   getUsers,
   createUser,
   getUserById,
+  updateUser,
 }
