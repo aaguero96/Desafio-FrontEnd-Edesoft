@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import RegisterPage from './pages/Register';
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,14 @@ const router = createBrowserRouter([
     index: true,
   },
   {
+    path: "/register",
+    element: <RegisterPage />
+  },
+  {
+    path: "/home/:id",
+    element: <Home />
+  },
+  {
     path: "/users",
     element: <Users />
   },
@@ -35,10 +44,6 @@ const router = createBrowserRouter([
   {
     path: "/edit/:id",
     element: <Update />
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />
   },
   {
     path: "/delete/:id",
