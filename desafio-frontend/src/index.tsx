@@ -5,11 +5,16 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Users from './components/Users';
 import App from './App';
+import Register from './components/Register';
 
 const router = createBrowserRouter([
   {
     path: "/users",
     element: <Users />
+  },
+  {
+    path: "/register",
+    element: <Register />
   },
   {
     path: "/",
