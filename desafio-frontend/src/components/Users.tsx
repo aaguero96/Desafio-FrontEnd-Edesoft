@@ -16,17 +16,17 @@ function Users() {
     city: '',
     phone: '',
   });
-  const [limit, setLimit] = useState<number | undefined>(undefined);
+  const [limit, setLimit] = useState<number>(10);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getUsers(limit, order.ASC);
+      const data = await getUsers(undefined, order.ASC);
       setLoading(false);
       setUsers(data);
       setFilteredUsers(data);
     };
     fetchData();
-  }, [limit]);
+  }, []);
 
   useEffect(() => {
     setFilteredUsers(users.filter((user) => {
@@ -36,10 +36,11 @@ function Users() {
         user.email.includes(filters.email.toLowerCase()),
         user.address.city.includes(filters.city.toLowerCase()),
         user.phone.includes(filters.phone.toLowerCase()),
+        user.id <= limit,
       ];
       return validate.every((i) => i);
     }));
-  }, [filters]);
+  }, [filters, limit]);
 
   if (loading) {
     return (
@@ -59,9 +60,13 @@ function Users() {
       <input
         type="number"
         id="limit"
+        max={users.length}
+        min={0}
+        disabled={loading}
         onChange={({ target: { value } }) => {
           setLimit(Number.parseInt(value));
         }}
+        value={limit}
       />
       <table>
         <thead>
