@@ -15,8 +15,14 @@ import { store } from './store';
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Login />,
+    index: true,
+  },
+  {
     path: "/login",
-    element: <Login />
+    element: <Login />,
+    index: true,
   },
   {
     path: "/users",
@@ -39,7 +45,7 @@ const router = createBrowserRouter([
     element: <Delete />
   },
   {
-    path: "/",
+    path: "/*",
     element: <App />
   }
 ]);
@@ -52,7 +58,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}/>
     </React.StrictMode>
   </Provider>
 );
