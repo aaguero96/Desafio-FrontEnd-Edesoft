@@ -74,7 +74,7 @@ function Login() {
       </div>
       <button
         onClick={() => {
-          const register = users?.filter((user) => {
+            const register = users?.filter((user) => {
             const validate1 = userName.toLowerCase() === user.username.toLowerCase();
             const validate2 = userName.toLowerCase() === user.email.toLowerCase();
             const validate3 = password === user.password;
@@ -89,7 +89,11 @@ function Login() {
       >
         Login
       </button>
-      <button>
+      <button
+        onClick={() => {
+          navigate("/register");
+        }}
+      >
         Cadastrar
       </button>
     </div>
