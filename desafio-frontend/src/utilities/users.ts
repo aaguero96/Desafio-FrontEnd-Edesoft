@@ -35,7 +35,14 @@ const createUser = async (user: IUser): Promise<IUser> => {
   return data;
 }
 
+const getUserById = async (id: number): Promise<IUser> => {
+  const response: Response = await fetch(`${BASE_URL}/${id}`);
+  const data: IUser = await response.json();
+  return data;
+}
+
 export {
   getUsers,
   createUser,
+  getUserById,
 }
