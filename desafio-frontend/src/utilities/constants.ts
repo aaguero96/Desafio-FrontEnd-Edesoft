@@ -25,7 +25,13 @@ const USERS_TABLE_HEADERS: IHeaders[] = [
   },
 ];
 
+const MIN_LEN_PASSWORD = 3;
+
+const MIN_LEN_NAME = 3;
+
 export {
   BASE_URL,
   USERS_TABLE_HEADERS,
+  MIN_LEN_PASSWORD,
+  MIN_LEN_NAME,
 }
