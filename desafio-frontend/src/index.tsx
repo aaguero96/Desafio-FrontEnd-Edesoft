@@ -8,6 +8,7 @@ import App from './App';
 import Register from './components/Register';
 import User from './components/User';
 import Update from './components/Update';
+import Delete from './components/Delete';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />
+  },
+  {
+    path: "/delete/:id",
+    element: <Delete />
   },
   {
     path: "/",
