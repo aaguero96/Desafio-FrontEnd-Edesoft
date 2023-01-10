@@ -6,11 +6,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Users from './components/Users';
 import App from './App';
 import Register from './components/Register';
+import User from './components/User';
 
 const router = createBrowserRouter([
   {
     path: "/users",
     element: <Users />
+  },
+  {
+    path: "/users/:id",
+    element: <User />
   },
   {
     path: "/register",
