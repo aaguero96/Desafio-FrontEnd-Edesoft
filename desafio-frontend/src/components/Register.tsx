@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { cryptPassword } from '../utilities/crypt';
 import { createUser } from '../utilities/users';
 import { validateEmail, validateName, validatePassword, validatePasswordConfim, validateUserRegister } from '../utilities/validate';
 
