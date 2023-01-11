@@ -50,9 +50,19 @@ const updateUser = async (user: IUser): Promise<IUser> => {
   return data;
 }
 
+const deleteUser = async (user: IUser): Promise<IUser> => {
+  const response: Response = await fetch(`${BASE_URL}/${user.id}`, {
+    method: "DELETE",
+    body: JSON.stringify(user),
+  });
+  const data: IUser = await response.json();
+  return data;
+}
+
 export {
   getUsers,
   createUser,
   getUserById,
   updateUser,
+  deleteUser,
 }
