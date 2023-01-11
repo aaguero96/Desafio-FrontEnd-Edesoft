@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { IUser } from '../utilities/userInterface';
-import { getUserById, updateUser } from '../utilities/users';
+import { setUserLocal } from '../utilities/localstorage';
+import { UserState } from '../utilities/userInterface';
+import { updateUser } from '../utilities/users';
 import { firstToUpper } from '../utilities/utils';
 import { validateEmail, validateName, validatePassword, validatePasswordConfim, validateUserRegister } from '../utilities/validate';
 
 function Update() {
-  const [user, setUser] = useState<IUser | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfim, setPasswordConfim] = useState<string>("");
@@ -23,34 +23,36 @@ function Update() {
 
   const { id } = useParams();
 
+  const loggedUser = useSelector<UserState, UserState["user"]>((state) => state.user);
+
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!loggedUser) {
+      navigate("/login");
+    }
+  })
 
   useEffect(() => {
     const fetchData = async () => {
-      if (id !== undefined) {
-        const data = await getUserById(Number.parseInt(id));
-        setLoading(false);
-        setUser(data);
-
-        setEmail(data.email);
-        setFirstName(firstToUpper(data.name.firstname));
-        setLastName(firstToUpper(data.name.lastname));
-        setUserName(data.username);
-        setCity(data.address.city);
-        setStreet(data.address.street);
-        setAddressNumber(data.address.number.toString());
-        setPostalCode(data.address.zipcode);
-        setPhone(data.phone);
+      if (loggedUser) {
+        setEmail(loggedUser.email);
+        setFirstName(firstToUpper(loggedUser.name.firstname));
+        setLastName(firstToUpper(loggedUser.name.lastname));
+        setUserName(loggedUser.username);
+        setCity(loggedUser.address.city);
+        setStreet(loggedUser.address.street);
+        setAddressNumber(loggedUser.address.number.toString());
+        setPostalCode(loggedUser.address.zipcode);
+        setPhone(loggedUser.phone);
       }
     };
     fetchData();
-  }, [id]);
+  }, []);
 
-  if (loading) {
-    return <div>Procurando...</div>
-  }
-
-  if (user === null || id === undefined) {
+  if (id === undefined) {
     return <div>Usuário não encrontrado</div>
   }
 
@@ -242,7 +244,7 @@ function Update() {
           phone,
         }, passwordConfim)}
         onClick={() => {
-          updateUser({
+          const newUser = {
             id: Number.parseInt(id),
             email,
             username: userName,
@@ -262,7 +264,10 @@ function Update() {
               },
             },
             phone,
-          });
+          }
+          updateUser(newUser);
+          setUserLocal(newUser);
+          dispatch({ type: "LOGGED_USER", payload: newUser });
         }}
       >
         Alterar
