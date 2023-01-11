@@ -10,6 +10,7 @@ const Delete = () => {
   const [password, setPassword] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [disableButton, setDisableButton] = useState<boolean>(true);
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -48,13 +49,20 @@ const Delete = () => {
         <div>
           <label htmlFor="password">Digite a sua senha:</label>
           <input
-            type="password"
+            type={ passwordVisible ? "text" : "password" }
             id="password"
             value={password}
             onChange={({ target: { value } }) => {
               setPassword(value);
             }}
           />
+          <button
+            onClick={() => {
+              setPasswordVisible(!passwordVisible);
+            }}
+          >
+            { passwordVisible ? "não mostrar" : "mostrar" }
+          </button>
         </div>
         <div>
           <label htmlFor="username">Digite seu usuário se deseja prosseguir (<strong>{loggedUser?.username}</strong>):</label>
