@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Users from './components/Users';
 import App from './App';
 import User from './components/User';
 import Update from './components/Update';
@@ -13,6 +12,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import RegisterPage from './pages/Register';
 import Home from './pages/Home';
+import UsersPage from './pages/Users';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/users",
-    element: <Users />
+    element: <UsersPage />
   },
   {
     path: "/users/:id",
@@ -54,8 +54,6 @@ const router = createBrowserRouter([
     element: <App />
   }
 ]);
-
-
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
