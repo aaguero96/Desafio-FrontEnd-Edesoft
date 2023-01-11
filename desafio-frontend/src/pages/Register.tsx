@@ -5,7 +5,6 @@ import Register from '../components/Register';
 function RegisterPage() {
   const navigate = useNavigate();
 
-
   return (
     <div>
       <button
