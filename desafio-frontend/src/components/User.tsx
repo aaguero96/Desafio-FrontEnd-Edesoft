@@ -29,7 +29,7 @@ function User() {
       <h3>Nome</h3>
       <span>{firstToUpper(user.name.firstname + " " + user.name.lastname)}</span>
       <h3>Endereço</h3>
-      <span>{user.address.city + " ," + user.address.street + " ," + user.address.number + " ,zip code: " + user.address.zipcode}</span>
+      <span>{user.address.city + ", " + user.address.street + ", " + user.address.number + ", zip code: " + user.address.zipcode}</span>
       <h3>Contato</h3>
       <span>{user.phone}</span>
     </div>
