@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TIMEOUT_TO_MENSAGE_SCAN } from '../utilities/constants';
-import { IUser } from '../utilities/userInterface';
+import { setUserLocal } from '../utilities/localstorage';
+import { IUser, UserState } from '../utilities/userInterface';
 import { getUsers } from '../utilities/users';
 import { order } from '../utilities/usersEnum';
 
@@ -13,7 +15,17 @@ function Login() {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [noHasRegister, setNoHasRegister] = useState<boolean>(true);
 
+  const dispatch = useDispatch();
+
+  const loggedUser = useSelector<UserState, UserState["user"]>((state) => state.user);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loggedUser) {
+      navigate(`/home/${loggedUser.id}}`)
+    }
+  }, [loggedUser, navigate])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,6 +93,8 @@ function Login() {
             return (validate1 || validate2) && validate3;
           });
           if (register?.length !== 0 && register !== undefined) {
+            dispatch({ type: "LOGGED_USER", payload: register[0] });
+            setUserLocal(register[0]);
             navigate(`/home/${register[0].id}}`);
           } else {
             setNoHasRegister(false);
