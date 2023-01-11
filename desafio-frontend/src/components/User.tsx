@@ -1,32 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { IUser } from '../utilities/userInterface';
-import { getUserById } from '../utilities/users';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { UserState } from '../utilities/userInterface';
 import { firstToUpper } from '../utilities/utils';
 
 function User() {
-  const [user, setUser] = useState<IUser | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const user = useSelector<UserState, UserState["user"]>((state) => state.user);
 
-  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (id !== undefined) {
-        const data = await getUserById(Number.parseInt(id));
-        setLoading(false);
-        setUser(data);
-      }
-    };
-    fetchData();
-  }, [id]);
+    if (!user) {
+      navigate("/login");
+    }
+  })
 
-  if (loading) {
-    return <div>Procurando...</div>
-  }
-
-  if (user === null) {
-    return <div>Usuário não encrontrado</div>
+  if (!user) {
+    return <div></div>
   }
 
   return (
