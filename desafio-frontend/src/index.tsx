@@ -5,7 +5,6 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import User from './components/User';
-import Update from './components/Update';
 import Delete from './components/Delete';
 import Login from './pages/Login';
 import { Provider } from 'react-redux';
@@ -13,6 +12,7 @@ import { store } from './store';
 import RegisterPage from './pages/Register';
 import Home from './pages/Home';
 import UsersPage from './pages/Users';
+import UpdatePage from './pages/Update';
 
 const router = createBrowserRouter([
   {
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/edit/:id",
-    element: <Update />
+    element: <UpdatePage />
   },
   {
     path: "/delete/:id",
