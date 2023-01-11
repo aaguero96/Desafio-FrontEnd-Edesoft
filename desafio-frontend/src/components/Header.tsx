@@ -16,6 +16,7 @@ function Header() {
         Home
       </button>
       <button
+      onClick={() => { navigate(`/users`) }}
       >
         Usuários
       </button>
