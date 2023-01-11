@@ -1,49 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { IUser } from '../utilities/userInterface';
-import { getUserById } from '../utilities/users';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { removeUserLocal, setUserLocal } from '../utilities/localstorage';
+import { UserState } from '../utilities/userInterface';
+import { deleteUser } from '../utilities/users';
 
 const Delete = () => {
   const [areYouSure, setAreYouSure] = useState<boolean | undefined>(undefined);
-  const [user, setUser] = useState<IUser | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
   const [password, setPassword] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [disableButton, setDisableButton] = useState<boolean>(true);
-  
-  const { id } = useParams();
 
   const navigate = useNavigate();
 
+  const loggedUser = useSelector<UserState, UserState["user"]>((state) => state.user);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (!areYouSure && areYouSure !== undefined) {
-      navigate("/users")
+      navigate("/home")
     }
   }, [areYouSure, navigate])
 
   useEffect(() => {
-    if (user !== null) {
-      const validade1 = password === user.password;
-      const validate2 = userName === user.username;
+    if (loggedUser !== undefined) {
+      const validade1 = password === loggedUser.password;
+      const validate2 = userName === loggedUser.username;
       const validate = validade1 && validate2
       setDisableButton(!validate);
     }
-  }, [password, userName]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (id !== undefined) {
-        const data = await getUserById(Number.parseInt(id));
-        setLoading(false);
-        setUser(data);
-      }
-    };
-    fetchData();
-  }, [id]);
-
-  if (loading) {
-    return <div>Carregando...</div>
-  }
+  }, [password, userName, loggedUser]);
 
   if (areYouSure === undefined) {
     return (
@@ -55,7 +42,7 @@ const Delete = () => {
     );
   }
 
-  if (areYouSure) {
+  if (areYouSure && loggedUser !== undefined) {
     return (
       <div>
         <div>
@@ -70,7 +57,7 @@ const Delete = () => {
           />
         </div>
         <div>
-          <label htmlFor="username">Digite seu usuário se deseja prosseguir (<strong>{user?.username}</strong>):</label>
+          <label htmlFor="username">Digite seu usuário se deseja prosseguir (<strong>{loggedUser?.username}</strong>):</label>
           <input
             type="text"
             id="username"
@@ -82,6 +69,12 @@ const Delete = () => {
         </div>
         <button
           disabled={disableButton}
+          onClick={() => {
+            deleteUser(loggedUser);
+            removeUserLocal();
+            dispatch({ type: "LOGGED_USER", payload: undefined });
+            navigate("/login");
+          }}
         >
           Deletar conta
         </button>
