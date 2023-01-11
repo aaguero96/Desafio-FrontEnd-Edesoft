@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setUserLocal } from '../utilities/localstorage';
 import { createUser } from '../utilities/users';
 import { validateEmail, validateName, validatePassword, validatePasswordConfim, validateUserRegister } from '../utilities/validate';
 
@@ -15,6 +18,10 @@ function Register() {
   const [addressNumber, setAddressNumber] = useState<string>("");
   const [postalCode, setPostalCode] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -204,7 +211,7 @@ function Register() {
           phone,
         }, passwordConfim)}
         onClick={() => {
-          createUser({
+          const newUser = {
             email,
             username: userName,
             password,
@@ -223,7 +230,11 @@ function Register() {
               },
             },
             phone,
-          });
+          };
+          createUser(newUser);
+          setUserLocal({...newUser, id: 11});
+          dispatch({ type: "LOGGED_USER", payload: {...newUser, id: 11} });
+          navigate("/home");
         }}
       >
         Cadastrar
