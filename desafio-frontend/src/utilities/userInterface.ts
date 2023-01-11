@@ -40,5 +40,5 @@ export interface IUserFilter {
 }
 
 export interface UserState {
-  users: IUser[];
+  user: IUser | undefined;
 }
