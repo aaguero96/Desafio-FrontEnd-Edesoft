@@ -1,18 +1,19 @@
+import { getUserLocal } from "./utilities/localstorage"
 import { IUser, UserState } from "./utilities/userInterface"
 
 const initialState = {
-  users: [],
+  user: getUserLocal(),
 }
 
 type Action = {
-  type: "ADD_USERS",
-  payload: IUser[],
+  type: "LOGGED_USER",
+  payload: IUser,
 }
 
 export const reducer = (state: UserState = initialState, action: Action) => {
   switch(action.type){
-    case "ADD_USERS": {
-      return {...state, users: [...state.users, ...action.payload]}
+    case "LOGGED_USER": {
+      return {...state, user: action.payload}
     }
     default:
       return state;
