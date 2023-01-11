@@ -23,7 +23,7 @@ function Login() {
 
   useEffect(() => {
     if (loggedUser) {
-      navigate(`/home/${loggedUser.id}}`)
+      navigate(`/home`)
     }
   }, [loggedUser, navigate])
 
@@ -95,7 +95,7 @@ function Login() {
           if (register?.length !== 0 && register !== undefined) {
             dispatch({ type: "LOGGED_USER", payload: register[0] });
             setUserLocal(register[0]);
-            navigate(`/home/${register[0].id}}`);
+            navigate(`/home`);
           } else {
             setNoHasRegister(false);
           }
