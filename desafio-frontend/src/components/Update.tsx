@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setUserLocal } from '../utilities/localstorage';
 import { UserState } from '../utilities/userInterface';
 import { updateUser } from '../utilities/users';
@@ -20,8 +20,6 @@ function Update() {
   const [addressNumber, setAddressNumber] = useState<string>("");
   const [postalCode, setPostalCode] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
-
-  const { id } = useParams();
 
   const loggedUser = useSelector<UserState, UserState["user"]>((state) => state.user);
 
@@ -50,10 +48,10 @@ function Update() {
       }
     };
     fetchData();
-  }, []);
+  }, [loggedUser]);
 
-  if (id === undefined) {
-    return <div>Usuário não encrontrado</div>
+  if (!loggedUser || (loggedUser.id === undefined)) {
+    <div>Usuário não encontrado</div>
   }
 
   return (
@@ -245,7 +243,7 @@ function Update() {
         }, passwordConfim)}
         onClick={() => {
           const newUser = {
-            id: Number.parseInt(id),
+            id: loggedUser?.id,
             email,
             username: userName,
             password,
@@ -268,13 +266,14 @@ function Update() {
           updateUser(newUser);
           setUserLocal(newUser);
           dispatch({ type: "LOGGED_USER", payload: newUser });
+          navigate("/home");
         }}
       >
         Alterar
       </button>
       <button
         onClick={() => {
-          navigate(`/delete/${id}`);
+          navigate(`/delete`);
         }}
       >
         Deletar
