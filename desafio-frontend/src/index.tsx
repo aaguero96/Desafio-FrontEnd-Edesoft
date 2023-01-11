@@ -4,7 +4,6 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import User from './components/User';
 import Delete from './components/Delete';
 import Login from './pages/Login';
 import { Provider } from 'react-redux';
@@ -30,7 +29,7 @@ const router = createBrowserRouter([
     element: <RegisterPage />
   },
   {
-    path: "/home/:id",
+    path: "/home",
     element: <Home />
   },
   {
@@ -38,15 +37,11 @@ const router = createBrowserRouter([
     element: <UsersPage />
   },
   {
-    path: "/users/:id",
-    element: <User />
-  },
-  {
-    path: "/edit/:id",
+    path: "/edit",
     element: <UpdatePage />
   },
   {
-    path: "/delete/:id",
+    path: "/delete",
     element: <Delete />
   },
   {
