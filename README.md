@@ -10,12 +10,12 @@
 
 1. Clone o repositório
 
-- Use o comando ```https://github.com/aaguero96/Desafio-FrontEnd-Edesoft.git``` para chaves HTTPS
-- Use o comando ```git@github.com:aaguero96/Desafio-FrontEnd-Edesoft.git``` para chaves SSH
+- Use o comando ```git clone https://github.com/aaguero96/Desafio-FrontEnd-Edesoft.git``` para chaves HTTPS
+- Use o comando ```git clone git@github.com:aaguero96/Desafio-FrontEnd-Edesoft.git``` para chaves SSH
 
 2. Entre na pasta do reposiótio clonado
 
-- Use o comando ```cd Desafio-FrontEnd-Edesoft/```
+- Use o comando ```cd Desafio-FrontEnd-Edesoft/desafio-frontend```
 
 3. Instale as dependências
 
