@@ -14,7 +14,12 @@ const getUserLocal = (): IUser | undefined => {
   return undefined;
 }
 
+const removeUserLocal = (): void => {
+  localstore.removeItem("user");
+}
+
 export {
   setUserLocal,
   getUserLocal,
+  removeUserLocal,
 }
