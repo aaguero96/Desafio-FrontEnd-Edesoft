@@ -12,6 +12,7 @@ import RegisterPage from './pages/Register';
 import Home from './pages/Home';
 import UsersPage from './pages/Users';
 import UpdatePage from './pages/Update';
+import DeletePage from './pages/Delete';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/delete",
-    element: <Delete />
+    element: <DeletePage />
   },
   {
     path: "/*",
