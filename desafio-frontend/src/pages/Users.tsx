@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
+import Users from '../components/Users';
+import Header from '../components/Header';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import Register from '../components/Register';
 import { UserState } from '../utilities/userInterface';
+import { useNavigate } from 'react-router-dom';
 
-function RegisterPage() {
+function UsersPage() {
   const loggedUser = useSelector<UserState, UserState["user"]>((state) => state.user);
 
   const navigate = useNavigate();
@@ -17,14 +18,10 @@ function RegisterPage() {
 
   return (
     <div>
-      <button
-        onClick={() => {navigate("/login")}}
-      >
-        Voltar
-      </button>
-      <Register />
+      <Header />
+      <Users />
     </div>
   );
 }
 
-export default RegisterPage;
+export default UsersPage;
